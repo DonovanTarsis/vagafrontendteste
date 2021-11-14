@@ -1,6 +1,8 @@
 import {
-  BrowserRouter as Router, Redirect, Route,
+  BrowserRouter as Router,
+  Route,
   Switch,
+  Redirect
 } from 'react-router-dom';
 import './App.css';
 import { AuthProvider } from './context/AuthContext';
@@ -16,21 +18,24 @@ const RotasProtegidas = ({ children }) => {
   );
 };
 
-const Routes = () => (
-  <Router>
-    <Switch>
+const Routes = () => {
+  return (
       <AuthProvider>
-        <Route path="/" exact component={Home} />
-        <Route path="/login" component={Login} />
-        <RotasProtegidas>
-          <Route
-            path="/mail"
-            component={Mail}
-          />
-        </RotasProtegidas>
+        <Router>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/home" exact component={Home} />
+            <Route path="/login" component={Login} />
+            <RotasProtegidas>
+              <Route
+                path="/mail"
+                component={Mail}
+              />
+            </RotasProtegidas>
+          </Switch>
+        </Router>
       </AuthProvider>
-    </Switch>
-  </Router>
-);
+  )
+};
 
 export default Routes;

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState } from "react";
+function useAuthProvider(){
+    const [logado, setLogado] =  useState('{}');
 
-function useAuthProvider() {
-  const [logado, setLogado] = useState('');
-  return {
+return{
     logado,
-    setLogado,
-  };
+    setLogado
+}
 }
 
 export default useAuthProvider;

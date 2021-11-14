@@ -1,0 +1,22 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/images/homeBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.image_copyright{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 2px;
+    background-color: #ffffffb0;
+    border-radius: 10px;
+    font-size: 1rem;
+}
