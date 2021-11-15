@@ -1,10 +1,13 @@
 import { useState } from "react";
 function useAuthProvider(){
-    const [logado, setLogado] =  useState('{}');
+    const [logado, setLogado] =  useState(false);
+    const [tree, setTree] =  useState([]);
 
 return{
     logado,
-    setLogado
+    setLogado,
+    tree,
+    setTree
 }
 }
 

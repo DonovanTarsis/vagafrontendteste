@@ -28,7 +28,7 @@ const Routes = () => {
             <Route path="/login" component={Login} />
             <RotasProtegidas>
               <Route
-                path="/mail"
+                path="/main"
                 component={Mail}
               />
             </RotasProtegidas>

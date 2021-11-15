@@ -1,7 +1,11 @@
+import CardLogin from '../../components/CardLogin';
 import './style.css';
 
+
 const Login = () => (
-  <h1>Login</h1>
-);
+    <main className="login-container">
+      <CardLogin />
+    </main>
+  );
 
 export default Login;

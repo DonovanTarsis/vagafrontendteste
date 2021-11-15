@@ -8,9 +8,9 @@ const Home = () => {
     history.push('/login')
   }
   return (
-    <main>
+    <main className="main-Home">
       <CustomButton sx={{
-        fontSize: "2.2rem",
+        fontSize: 22,
         backgroundColor: "#1a2fc9b8",
         ":hover":{
           backgroundColor: "#1a2fc9"

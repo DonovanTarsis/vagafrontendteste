@@ -1,4 +1,4 @@
-main{
+.main-Home{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,6 +8,7 @@ main{
     height: 100vh;
     background-image: url('../../assets/images/homeBackground.jpg');
     background-repeat: no-repeat;
+    background-position-x: center;
     background-size: cover;
 }
 
@@ -18,5 +19,5 @@ main{
     padding: 2px;
     background-color: #ffffffb0;
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: 16px;
 }
