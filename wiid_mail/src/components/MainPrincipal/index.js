@@ -3,7 +3,7 @@ import useAuth from '../../hooks/useAuth';
 import CardChat from '../CardChat';
 
 const MainPrincipal = (props) => {
-  const {chats} = useAuth()
+  const {chats, arquivadas} = useAuth()
   return (
   <Stack direction="column" spacing={2} sx={{
     width: '100%',
@@ -12,7 +12,7 @@ const MainPrincipal = (props) => {
   }}>
     {
       chats.subMenuItems && chats.subMenuItems.map( item =>
-      <CardChat 
+      !arquivadas.find(id => id === item.id ) && <CardChat 
       id={item.id}
       name={item.name}
       owner={item.owner}

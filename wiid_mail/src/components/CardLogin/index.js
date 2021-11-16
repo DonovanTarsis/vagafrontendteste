@@ -47,6 +47,8 @@ function CardLogin() {
         const link = 'http://my-json-server.typicode.com/workinideas/vagafrontendteste/menus'
         requestFetch(link, 'GET', setTree)
         setLogado(true)
+        setLocalUser('')
+        setLocalSenha('')
         history.push('./Main')
     };
 

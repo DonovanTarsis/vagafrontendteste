@@ -2,9 +2,10 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CustomButton from '../CustomButton';
+import useAuth from '../../hooks/useAuth';
 
 const NavigationFavorites = (props) => {
-
+    const {language} = useAuth()
     return (
         <div >
             <Stack direction="row" spacing={2} sx={{
@@ -22,7 +23,7 @@ const NavigationFavorites = (props) => {
                       borderColor: "#919191"
                     }
                     }}>
-                    Favoritas
+                    {language.favorites}
                 </CustomButton>
             </Stack>
         </div >

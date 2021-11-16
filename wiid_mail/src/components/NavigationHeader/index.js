@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,6 +7,15 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
+import * as React from 'react';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuList from '@mui/material/MenuList';
+import { useHistory } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -38,52 +47,127 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const NavigationHeader = (props) => {
-    const [select, setSelect] = React.useState('');
+  const {setLogado, language} = useAuth();
+  const [select, setSelect] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
+  const history = useHistory()
 
-    const handleChange = (event) => {
-        setSelect(event.target.value);
-    };
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
 
-    return (
-        <div >
-            <Stack direction="row" spacing={2} sx={{
-                borderBottom: 'solid 1px #919191',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '2%'
-            }}>
-                <StyledBadge
-        overlap="circular"
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        variant="dot"
-      >
-        <Avatar>
+  const handleClose = (event) => {
+      setLogado(false)
+      history.push('/home')
+
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  }
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
+
+  const handleChange = (event) => {
+    setSelect(event.target.value);
+  };
+
+  return (
+    <div >
+      <Stack direction="row" spacing={2} sx={{
+        borderBottom: 'solid 1px #919191',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '2%',
+        zIndex: 1
+      }}>
+        <StyledBadge
+          overlap="circular"
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          variant="dot"
+        >
+          <Avatar
+            ref={anchorRef}
+            id="composition-button"
+            aria-controls={open ? 'composition-menu' : undefined}
+            aria-expanded={open ? 'true' : undefined}
+            aria-haspopup="true"
+            onClick={handleToggle}>
             OA
-        </Avatar>
-      </StyledBadge>
-                <FormControl sx={{ m: 1, minWidth: 100 }}>
-                    <InputLabel id="demo-simple-select-autowidth-label">New</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-autowidth-label"
-                        id="demo-simple-select-autowidth"
-                        value={select}
-                        onChange={handleChange}
-                        autoWidth
-                        label="New"
+          </Avatar>
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            role={undefined}
+            placement="bottom-start"
+            transition
+            disablePortal
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                    placement === 'bottom-start' ? 'left top' : 'left bottom',
+                }}
+              >
+                <Paper >
+                  <ClickAwayListener onClickAway={handleToggle}>
+                    <MenuList
+                      autoFocusItem={open}
+                      id="composition-menu"
+                      aria-labelledby="composition-button"
+                      onKeyDown={handleListKeyDown}
                     >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={'Conta'}>Conta</MenuItem>
-                        <MenuItem value={'Contato'}>Contato</MenuItem>
-                        <MenuItem value={'Menssagem'}>Menssagem</MenuItem>
-                    </Select>
-                </FormControl>
-            </Stack>
-        </div >
-    )
+                      <MenuItem onClick={handleClose} sx={{
+                        backgroundColor: '#ffffffff',
+                        zIndex: 1
+                      }}>Logout <LogoutIcon /></MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        </StyledBadge>
+        <FormControl sx={{ m: 1, minWidth: 100 }}>
+          <InputLabel id="demo-simple-select-autowidth-label">{language.navigationSelectLabel}</InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            value={select}
+            onChange={handleChange}
+            autoWidth
+            label={language.navigationSelectLabel}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={'Conta'}>Conta</MenuItem>
+            <MenuItem value={'Contato'}>Contato</MenuItem>
+            <MenuItem value={'Menssagem'}>Menssagem</MenuItem>
+          </Select>
+        </FormControl>
+      </Stack>
+    </div >
+  )
 };
 
 export default NavigationHeader;

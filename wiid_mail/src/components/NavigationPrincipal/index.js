@@ -52,7 +52,7 @@ const NavigationPrincipal = (props) => {
     );
   };
   return (
-    <Box sx={{ height: 'calc(100% - 85px)', flexGrow: 1, width: '100%', overflowY: 'auto' }}>
+    <Box sx={{ height: 'calc(100% - 145px)', flexGrow: 1, width: '100%', overflowY: 'auto' }}>
       <Box sx={{ mb: 1 }}>
         <Button onClick={handleExpandClick}>
           {expanded.length === 0 ? 'Expand all' : 'Collapse all'}

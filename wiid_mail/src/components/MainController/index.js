@@ -7,7 +7,7 @@ import './style.css'
 import useAuth from '../../hooks/useAuth';
 
 const MainController = (props) => {
-  const {chats, setSelecteds, selectedAll, setSelectedAll} = useAuth();
+  const { language, chats, setSelecteds, selectedAll, setSelectedAll, setArquivadas, selecteds, arquivadas} = useAuth();
 
   function handleCheck(event) {
     setSelectedAll(!selectedAll)
@@ -21,6 +21,12 @@ const MainController = (props) => {
         const newSelecteds = [];
         setSelecteds(newSelecteds)
     }
+}
+
+function handleClick() {
+  setArquivadas([...arquivadas, ...selecteds])
+  setSelecteds([])
+  setSelectedAll(false)
 }
   return(
   <Stack spacing={2} direction="row" sx={{
@@ -40,7 +46,19 @@ const MainController = (props) => {
           borderColor: "#919191"
         }
       }}>
-        Atribuir
+        {language.toAssign}
+      </CustomButton>
+      <CustomButton sx={{
+        color: "#000",
+        borderColor: "#000",
+        ":hover": {
+          color: "#919191",
+          borderColor: "#919191"
+        }
+      }}
+      onClick={handleClick} 
+      >
+        {language.toFile}
       </CustomButton>
       <CustomButton sx={{
         color: "#000",
@@ -50,17 +68,7 @@ const MainController = (props) => {
           borderColor: "#919191"
         }
       }}>
-        Arquivar
-      </CustomButton>
-      <CustomButton sx={{
-        color: "#000",
-        borderColor: "#000",
-        ":hover": {
-          color: "#919191",
-          borderColor: "#919191"
-        }
-      }}>
-        Agendar
+        {language.program}
       </CustomButton>
     </div>
     <IconButton >
