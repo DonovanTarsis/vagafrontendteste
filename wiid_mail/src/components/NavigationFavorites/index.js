@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Button from '@mui/material/Button';
+import CustomButton from '../CustomButton';
 
 const NavigationFavorites = (props) => {
 
@@ -14,12 +14,16 @@ const NavigationFavorites = (props) => {
                 alignItems: 'center',
                 padding: '2%'
             }}>
-                <Button variant="outlined" endIcon={<MoreVertIcon />} sx={{
+                <CustomButton variant="outlined" endIcon={<MoreVertIcon />} sx={{
                     color:"#000",
-                    borderColor: "#000"
+                    borderColor: "#000",
+                    ":hover": {
+                      color: "#919191",
+                      borderColor: "#919191"
+                    }
                     }}>
                     Favoritas
-                </Button>
+                </CustomButton>
             </Stack>
         </div >
     )

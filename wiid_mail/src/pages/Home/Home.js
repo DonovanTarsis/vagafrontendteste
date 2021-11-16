@@ -1,4 +1,5 @@
-import CustomButton from '../../components/CustomButton';
+import Button from '@mui/material/Button';
+
 import './style.css';
 import { useHistory } from 'react-router-dom';
 
@@ -9,7 +10,7 @@ const Home = () => {
   }
   return (
     <main className="main-Home">
-      <CustomButton sx={{
+      <Button variant="contained" sx={{
         fontSize: 22,
         backgroundColor: "#1a2fc9b8",
         ":hover":{
@@ -19,7 +20,7 @@ const Home = () => {
       onClick={handleClick}
       > 
       ACESSAR CONTA
-      </ CustomButton>
+      </Button>
       <p className="image_copyright">
         Imagem de
         {' '}

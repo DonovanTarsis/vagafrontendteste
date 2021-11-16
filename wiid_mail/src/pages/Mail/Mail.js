@@ -1,4 +1,5 @@
 import Split from 'react-split'
+import MailMain from '../../components/MailMain';
 import MailNavigation from '../../components/MailNavigation';
 import './style.css'
 
@@ -14,7 +15,9 @@ const Mail = () => {
       <div className="left-container">
         <MailNavigation />
       </div>
-      <div></div>
+      <div className="right-container">
+        <MailMain />
+      </div>
     </Split>
   );
 };

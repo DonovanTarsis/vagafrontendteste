@@ -10,12 +10,13 @@ import requestFetch from '../../Services/requestFetch';
 
 
 const NavigationPrincipal = (props) => {
-  const { tree, setChats } = useAuth()
+  const { tree, setChats, setSelecteds, setSelectedAll } = useAuth()
   const [expanded, setExpanded] = useState([]);
   const [selected, setSelected] = useState([]);
 
   const handleClickTreeItem = ( id ) => {
-    console.log(id);
+    setSelectedAll(false)
+    setSelecteds([])
     const link = `http://my-json-server.typicode.com/workinideas/vagafrontendteste/items/${id}`;
     requestFetch(link, 'GET', setChats)
   };
@@ -42,7 +43,7 @@ const NavigationPrincipal = (props) => {
     const itensSelected = [];
     for (let item of tree) {
       itensSelected.push(item.id);
-      for (let subItem of item) {
+      for (let subItem of item.subMenus) {
         itensSelected.push(subItem.id);
       }
     }

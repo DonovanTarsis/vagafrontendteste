@@ -19,3 +19,7 @@
 .left-container{
     max-width: 600px;
 }
+
+.right-container{
+    min-width: 445px;
+}
