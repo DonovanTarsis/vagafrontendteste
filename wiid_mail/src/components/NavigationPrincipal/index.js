@@ -14,11 +14,11 @@ const NavigationPrincipal = (props) => {
   const [expanded, setExpanded] = useState([]);
   const [selected, setSelected] = useState([]);
 
-  const handleClickTreeItem = ( id ) => {
+  const handleClickTreeItem = async ( id ) => {
     setSelectedAll(false)
     setSelecteds([])
     const link = `http://my-json-server.typicode.com/workinideas/vagafrontendteste/items/${id}`;
-    requestFetch(link, 'GET', setChats)
+    await requestFetch(link, 'GET', setChats)
   };
 
   const handleToggle = (event, nodeIds) => {
